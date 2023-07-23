@@ -1,16 +1,33 @@
 import "./index.css";
-import { TaskObject } from "./components/Task.tsx";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TaskList from "./components/TaskList.tsx";
+import { TaskObject } from "./components/Task.tsx";
 import logo from "./assets/logo.svg";
 import sum from "./assets/sum.svg";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { v4 as uuidv4 } from "uuid";
 
+// Define our custom hook with proper typing
+function useLocalStorageState(
+  key: string,
+  defaultValue: TaskObject[]
+): [TaskObject[], React.Dispatch<React.SetStateAction<TaskObject[]>>] {
+  const [state, setState] = useState<TaskObject[]>(() => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue !== null ? JSON.parse(storedValue) : defaultValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
+
+  return [state, setState];
+}
+
 function App() {
   // Define the state for the tasks
-  const [tasks, setTasks] = useState<TaskObject[]>([]);
+  const [tasks, setTasks] = useLocalStorageState("tasks", []);
 
   // Define the state for the new task input
   const [newTask, setNewTask] = useState<string>("");
@@ -38,7 +55,7 @@ function App() {
   function toggleCompleted(id: string): void {
     // Create a new array with tasks where the completed flag of the task with the given id is toggled
     const newTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task,
+      task.id === id ? { ...task, completed: !task.completed } : task
     );
 
     // Update the tasks state with the modified array
@@ -54,25 +71,21 @@ function App() {
     setTasks(newTasks);
   }
 
-  // Use useEffect to load and save the tasks from/to localStorage
+  // Use useEffect to load the tasks from localStorage when the app mounts
   useEffect(() => {
-    // Load the tasks from localStorage when the app mounts
     const savedTasks = localStorage.getItem("tasks");
 
-    // Check if savedTasks is not null before parsing
     if (savedTasks !== null) {
-      const parsedTasks = JSON.parse(savedTasks);
-      // console.log("Loading tasks from localStorage: ", parsedTasks);
-      setTasks(parsedTasks);
+      setTasks(JSON.parse(savedTasks));
+    } else {
+      setTasks([]);
     }
   }, []); // Only run once on mount
 
   useEffect(() => {
     // Save the tasks to localStorage when they change
-    if (tasks.length) {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      // console.log("Saving tasks to localStorage: ", tasks);
-    }
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    // console.log("Saving tasks to localStorage: ", tasks);
   }, [tasks]); // Run whenever tasks change
 
   return (
