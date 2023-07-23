@@ -80,7 +80,7 @@ function App() {
     } else {
       setTasks([]);
     }
-  }, []); // Only run once on mount
+  }, [setTasks]); // Only run once on mount
 
   useEffect(() => {
     // Save the tasks to localStorage when they change
