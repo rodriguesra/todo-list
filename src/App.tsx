@@ -76,7 +76,7 @@ function App() {
   }, [tasks]); // Run whenever tasks change
 
   return (
-    <div className="h-screen bg-gray-600">
+    <div className="min-h-screen bg-gray-600">
       <div className="flex flex-col justify-center items-center bg-gray-700 h-[200px]">
         <img src={logo} alt="" className="w-48 h-20"/>
       </div>
