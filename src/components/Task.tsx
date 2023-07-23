@@ -22,7 +22,7 @@ function Task({task, index, toggleCompleted, removeTask}: TaskProps) {
           type="checkbox"
           checked={task.completed}
           onChange={() => toggleCompleted(index)}
-          className={`mr-4 form-checkbox rounded-full text-white my-auto ${task.completed ? "checked:bg-purple" : "border-blue border-1 bg-gray-400"} box-border`}
+          className={`mr-4 form-checkbox rounded-full text-white my-auto ${task.completed ? "checked:bg-purple" : "border-blue border-1 bg-gray-500"} box-border`}
         />
         <span className={`${task.completed ? "text-sm line-through text-gray-300" : "text-sm text-gray-200"}`}>
           {task.text}

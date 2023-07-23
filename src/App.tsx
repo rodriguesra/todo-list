@@ -80,7 +80,7 @@ function App() {
       <div className="flex flex-col justify-center items-center bg-gray-700 h-[200px]">
         <img src={logo} alt="" className="w-48 h-20"/>
       </div>
-      <div className="text-gray-100 mx-auto py-10 px-4 w-2/3 -mt-16">
+      <div className="text-gray-100 mx-auto py-10 px-4 w-2/3 -mt-[4rem]">
         <div className="w-2/3 mx-auto">
           <div className="flex justify-center mb-10">
             <input
@@ -88,10 +88,10 @@ function App() {
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               placeholder="Adicione uma nova tarefa"
-              className="border-none rounded-lg py-2 px-4 w-full mr-2 bg-gray-500"
+              className="border-none rounded-lg py-2 h-12 px-4 w-full mr-2 bg-gray-500"
             />
             <button onClick={addTask}
-                    className="flex justify-center items-center gap-2 bg-blue-dark text-white text-xs font-semibold tracking-wide py-2 px-4 rounded-lg shadow-sm hover:bg-blue">Criar
+                    className="flex justify-center items-center gap-2 bg-blue-dark text-white text-xs font-semibold tracking-wide ml-1 py-2 px-4 rounded-lg shadow-sm hover:bg-blue">Criar
               <img src={sum} alt=""/>
             </button>
           </div>

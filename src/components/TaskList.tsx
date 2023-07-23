@@ -19,11 +19,11 @@ function TaskList({tasks, toggleCompleted, removeTask}: TaskListProps) {
     <div className="w-2/3 mx-auto space-y-4 mt-16">
       <div className="flex justify-between mb-6 bg-white shadow-sm rounded-lg">
         <h3 className="font-semibold text-blue">
-          Tarefas criadas <span className="px-2 py-1 bg-gray-400 text-gray-100 text-xs rounded-xl">{totalTasks}</span>
+          Tarefas criadas <span className="ml-2 px-3 py-1 bg-gray-500 text-gray-100 text-xs rounded-xl">{totalTasks}</span>
         </h3>
         <h3 className="font-semibold text-purple">
           Concluídas <span
-          className="px-2 py-1 bg-gray-400 text-gray-100 text-xs rounded-xl">{totalTasks === 0 ? `0` : `${completedTasks} de ${totalTasks}`}</span>
+          className="ml-2 px-3 py-1 bg-gray-500 text-gray-100 text-xs rounded-xl">{totalTasks === 0 ? `0` : `${completedTasks} de ${totalTasks}`}</span>
         </h3>
       </div>
       {totalTasks === 0 && <hr className="mb-6 border-gray-400"/>}
