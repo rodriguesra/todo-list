@@ -1,4 +1,4 @@
-import {BiTrash} from "react-icons/bi";
+import { BiTrash } from "react-icons/bi";
 
 // Define the structure of the task object
 export interface TaskObject {

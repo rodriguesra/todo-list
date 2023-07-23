@@ -1,4 +1,4 @@
-import Task, {TaskObject} from "./Task.tsx";
+import Task, { TaskObject } from "./Task.tsx";
 import clipboard from "../assets/clipboard.svg";
 
 // Define the props structure for the TaskList component

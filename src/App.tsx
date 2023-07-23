@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import TaskList from "./components/TaskList.tsx";
 import logo from "./assets/logo.svg";
 import sum from "./assets/sum.svg";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
