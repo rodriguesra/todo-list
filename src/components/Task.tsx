@@ -24,7 +24,7 @@ function Task({ task, toggleCompleted, removeTask }: TaskProps) {
           onChange={() => toggleCompleted(task.id)}
           className={`mr-4 form-checkbox rounded-full text-white my-auto ${
             task.completed
-              ? "checked:bg-purple"
+              ? "checked:bg-purple checked:hover:bg-purple-dark"
               : "border-blue border-1 bg-gray-500"
           } box-border`}
         />

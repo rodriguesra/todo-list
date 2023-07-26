@@ -4,14 +4,12 @@ import TaskList from "./components/TaskList.tsx";
 import { TaskObject } from "./components/Task.tsx";
 import logo from "./assets/logo.svg";
 import sum from "./assets/sum.svg";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { v4 as uuidv4 } from "uuid";
 
 // Define our custom hook with proper typing
 function useLocalStorageState(
   key: string,
-  defaultValue: TaskObject[]
+  defaultValue: TaskObject[],
 ): [TaskObject[], React.Dispatch<React.SetStateAction<TaskObject[]>>] {
   const [state, setState] = useState<TaskObject[]>(() => {
     const storedValue = localStorage.getItem(key);
@@ -55,7 +53,7 @@ function App() {
   function toggleCompleted(id: string): void {
     // Create a new array with tasks where the completed flag of the task with the given id is toggled
     const newTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
+      task.id === id ? { ...task, completed: !task.completed } : task,
     );
 
     // Update the tasks state with the modified array
@@ -71,22 +69,10 @@ function App() {
     setTasks(newTasks);
   }
 
-  // Use useEffect to load the tasks from localStorage when the app mounts
-  useEffect(() => {
-    const savedTasks = localStorage.getItem("tasks");
-
-    if (savedTasks !== null) {
-      setTasks(JSON.parse(savedTasks));
-    } else {
-      setTasks([]);
-    }
-  }, [setTasks]); // Only run once on mount
-
-  useEffect(() => {
-    // Save the tasks to localStorage when they change
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    // console.log("Saving tasks to localStorage: ", tasks);
-  }, [tasks]); // Run whenever tasks change
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent the form from refreshing the page
+    addTask(); // Add the task
+  };
 
   return (
     <div className="min-h-screen bg-gray-600">
@@ -95,7 +81,10 @@ function App() {
       </div>
       <div className="text-gray-100 mx-auto py-10 px-4 w-2/3 -mt-[4rem]">
         <div className="w-2/3 mx-auto">
-          <div className="flex justify-center mb-10">
+          <form
+            className="flex justify-center mb-10"
+            onSubmit={handleFormSubmit}
+          >
             <input
               type="text"
               value={newTask}
@@ -110,7 +99,7 @@ function App() {
               Criar
               <img src={sum} alt="" />
             </button>
-          </div>
+          </form>
         </div>
         <TaskList
           tasks={tasks}
